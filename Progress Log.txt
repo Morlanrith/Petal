@@ -1,0 +1,12 @@
+------------------------------------------------------------------------------------------------------------------------------------
+Date: 16/05/2022
+
+- Started a new project, known as "Petal". The objective of this project will be to create a working prototype for a character 
+action game based on the web series "RWBY".
+- To start with, I have copied my existing project "Zenos" which I will use as a base to work from.
+- Replaced the standard knight model with a basic red mannequin.
+------------------------------------------------------------------------------------------------------------------------------------
+Date:
+
+
+------------------------------------------------------------------------------------------------------------------------------------
