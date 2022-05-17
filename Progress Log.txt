@@ -6,6 +6,13 @@ action game based on the web series "RWBY".
 - To start with, I have copied my existing project "Zenos" which I will use as a base to work from.
 - Replaced the standard knight model with a basic red mannequin.
 ------------------------------------------------------------------------------------------------------------------------------------
+Date: 17/05/2022
+
+- Planned out the work required for the "basic premise" prototype, in which the general arena and structure of the prototype will be
+built.
+- Created a new flat landscape, using an obtained snow material (may require more changes later).
+- Created a new skybox, showing a dark night sky. Also, created a moon structure for use in said sky.
+------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
 
