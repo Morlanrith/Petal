@@ -13,6 +13,16 @@ built.
 - Created a new flat landscape, using an obtained snow material (may require more changes later).
 - Created a new skybox, showing a dark night sky. Also, created a moon structure for use in said sky.
 ------------------------------------------------------------------------------------------------------------------------------------
+Date: 18/05/2022
+
+- Lowered the depth of the terrain for the player spawn area.
+- Added an invisible barrier around the players spawn area, to act as the perimeter for the "arena".
+------------------------------------------------------------------------------------------------------------------------------------
+Date: 19/05/2022
+
+- Added some wind sound effects that play randomly to add some ambience.
+- Added some falling snow particle FX to the arena area.
+------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
 
