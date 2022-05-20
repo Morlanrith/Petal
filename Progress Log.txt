@@ -23,6 +23,10 @@ Date: 19/05/2022
 - Added some wind sound effects that play randomly to add some ambience.
 - Added some falling snow particle FX to the arena area.
 ------------------------------------------------------------------------------------------------------------------------------------
+Date: 20/05/2022
+
+- Added some simple tree models, and used them to create a "forest" surrounding the arena area.
+------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
 
