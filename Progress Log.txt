@@ -27,6 +27,11 @@ Date: 20/05/2022
 
 - Added some simple tree models, and used them to create a "forest" surrounding the arena area.
 ------------------------------------------------------------------------------------------------------------------------------------
+Date: 23/05/2022
+
+- Updated the version of UE4 used from 4.25.4 to 4.27.2.
+- Added a pause menu that can be controlled with both mouse and keyboard, as well as a gamepad.
+------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
 
