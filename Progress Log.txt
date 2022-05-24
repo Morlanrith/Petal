@@ -37,6 +37,7 @@ Date: 24/05/2022
 - Added a main menu screen that the player will see upon first opening the game.
 - Experimented with breakpoints and the debug system, to ensure they are ready to be used for future development.
 - Created a rough post-premise plan, which is designed to identify all the elements needed for the final version of Petal.
+- Added a basic loading screen.
 ------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
