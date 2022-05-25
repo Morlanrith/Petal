@@ -39,6 +39,14 @@ Date: 24/05/2022
 - Created a rough post-premise plan, which is designed to identify all the elements needed for the final version of Petal.
 - Added a basic loading screen.
 ------------------------------------------------------------------------------------------------------------------------------------
+Date: 25/05/2022
+
+- Adapted post-premise plan to Trello board.
+- Created a basic scythe model, which replaces the currently used sword model.
+- Hitbox and attacking functions altered to still somewhat work with the scythe (although new animations will still be needed).
+- Hitbox re-sizing has been disabled, as it has little effect on the scythe due to its shape. The parameters for it, will not be
+yet removed though, as I feel we may still need them later.
+------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
 
