@@ -46,6 +46,7 @@ Date: 25/05/2022
 - Hitbox and attacking functions altered to still somewhat work with the scythe (although new animations will still be needed).
 - Hitbox re-sizing has been disabled, as it has little effect on the scythe due to its shape. The parameters for it, will not be
 yet removed though, as I feel we may still need them later.
+- Adjusted the snow particle FX to warm-up for five seconds worth of time before starting the level.
 ------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
