@@ -24,7 +24,7 @@ void AMainCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	if (IsCharging && ChargeMultiplier < 3.0f) ChargeMultiplier += DeltaTime;
-	if (IsDashing) {
+	if (IsDashing || IsPetalBursting) {
 		AddMovementInput(UKismetMathLibrary::GetForwardVector(FRotator(0.0f, GetMesh()->GetComponentRotation().Yaw + 90.0f, 0.0f)));
 	}
 	else if (IsLockedOn) {
@@ -66,7 +66,8 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 }
 
 void AMainCharacter::PlayAttackMontage(bool isHeavy) {
-	if (IsCharging) {
+	if (IsPetalBursting) return;
+	else if (IsCharging) {
 		if (isHeavy) {
 			IsAttacking = true;
 			PlayAttackAnim(4, -1, 1.25f, 2.0f + (0.5f * ChargeMultiplier), 350 * ChargeMultiplier, 0, 350.0f);
@@ -127,6 +128,12 @@ void AMainCharacter::PlayAttackCombo() {
 	NextHeavy = false;
 }
 
+void AMainCharacter::StartPetalBurst(float forwardScale, float rightScale) {
+	if (IsPetalBursting || IsAttacking || IsCharging || IsDashing || this->GetMovementComponent()->IsFalling()) return;
+	this->PlayAnimMontage(LoadObject<UAnimMontage>(NULL, UTF8_TO_TCHAR("AnimMontage'/Game/PetalContent/Animation/Player/Animations/Movement/xbot_PetalBurst.xbot_PetalBurst'")), 2.0f);
+	GetMesh()->SetWorldRotation(FRotator(0.0f, GetCharacterMovement()->Velocity.Rotation().Yaw - 90.0f, 0.0f));
+}
+
 void AMainCharacter::PlayAttackAnim(int AnimID, int counter, float playRate, float hitBoxScale, int swingingForce, int forwardStep, float upwardForce) {
 	SaveAttack = false;
 	SwingingForce = swingingForce;
@@ -155,7 +162,7 @@ void AMainCharacter::LookRight(float axis) {
 
 void AMainCharacter::HeavyCharge(UAnimMontage* startAnim) {
 	if (AttackCounter <= 0 && IsAttacking) return;
-	if (AttackCounter > 0 || this->GetMovementComponent()->IsFalling() || IsSprinting) {
+	if (AttackCounter > 0 || this->GetMovementComponent()->IsFalling() || IsSprinting || IsPetalBursting) {
 		PlayAttackMontage(true);
 		return;
 	}

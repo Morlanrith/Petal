@@ -45,6 +45,8 @@ public:
 		bool IsDashing = false;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		bool IsLockedOn = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		bool IsPetalBursting = false;
 	bool NextHeavy = false;
 	int32 AttackCounter = 0;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
@@ -57,6 +59,8 @@ public:
 		TArray<UAnimMontage*> AttackMontages;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		ABasicEnemy* ClosestTarget;
+	UFUNCTION(BlueprintCallable)
+		void StartPetalBurst(float forwardScale, float rightScale);
 	UFUNCTION(BlueprintCallable)
 		void PlayAttackMontage(bool isHeavy = false);
 	UFUNCTION(BlueprintCallable)

@@ -48,6 +48,12 @@ Date: 25/05/2022
 yet removed though, as I feel we may still need them later.
 - Adjusted the snow particle FX to warm-up for five seconds worth of time before starting the level.
 ------------------------------------------------------------------------------------------------------------------------------------
+Date: 26/05/2022
+
+- Added a basic "dodge" ability, that allows the player to move very quickly in their faced direction. (The idea is that this
+ability will allow the player to be immune from enemy attacks while active, although that cannot be implemented until we actually
+have enemy attacks).
+------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
 
