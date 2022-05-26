@@ -130,8 +130,16 @@ void AMainCharacter::PlayAttackCombo() {
 
 void AMainCharacter::StartPetalBurst(float forwardScale, float rightScale) {
 	if (IsPetalBursting || IsAttacking || IsCharging || IsDashing || this->GetMovementComponent()->IsFalling()) return;
+	IsPetalBursting = true;
 	this->PlayAnimMontage(LoadObject<UAnimMontage>(NULL, UTF8_TO_TCHAR("AnimMontage'/Game/PetalContent/Animation/Player/Animations/Movement/xbot_PetalBurst.xbot_PetalBurst'")), 2.0f);
-	GetMesh()->SetWorldRotation(FRotator(0.0f, GetCharacterMovement()->Velocity.Rotation().Yaw - 90.0f, 0.0f));
+	if (forwardScale || rightScale) {
+		float newYaw = CameraArm->GetComponentRotation().Yaw - 90.0f;
+		if (forwardScale < 0.0f) newYaw += 180.0f;
+
+		if (!forwardScale) newYaw += (rightScale > 0.0f ? 90.0f : -90.0f);
+		else if(rightScale) newYaw += UKismetMathLibrary::DegAtan(rightScale / forwardScale);
+		GetMesh()->SetWorldRotation(FRotator(0.0f, newYaw, 0.0f));
+	}
 }
 
 void AMainCharacter::PlayAttackAnim(int AnimID, int counter, float playRate, float hitBoxScale, int swingingForce, int forwardStep, float upwardForce) {

@@ -53,6 +53,7 @@ Date: 26/05/2022
 - Added a basic "dodge" ability, that allows the player to move very quickly in their faced direction. (The idea is that this
 ability will allow the player to be immune from enemy attacks while active, although that cannot be implemented until we actually
 have enemy attacks).
+- Added greater direction control for the dodge ability.
 ------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
