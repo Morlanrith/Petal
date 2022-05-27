@@ -135,7 +135,6 @@ void AMainCharacter::StartPetalBurst(float forwardScale, float rightScale) {
 	if (forwardScale || rightScale) {
 		float newYaw = CameraArm->GetComponentRotation().Yaw - 90.0f;
 		if (forwardScale < 0.0f) newYaw += 180.0f;
-
 		if (!forwardScale) newYaw += (rightScale > 0.0f ? 90.0f : -90.0f);
 		else if(rightScale) newYaw += UKismetMathLibrary::DegAtan(rightScale / forwardScale);
 		GetMesh()->SetWorldRotation(FRotator(0.0f, newYaw, 0.0f));

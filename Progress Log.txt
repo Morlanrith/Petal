@@ -55,6 +55,11 @@ ability will allow the player to be immune from enemy attacks while active, alth
 have enemy attacks).
 - Added greater direction control for the dodge ability.
 ------------------------------------------------------------------------------------------------------------------------------------
+Date: 27/05/2022
+
+- Allowed the player to pass through enemies when using the dodge ability.
+- Rebound the hotkey for the dodge ability on keyboard, to fix and issue with recognising the input (gamepad is unchanged).
+------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
 
