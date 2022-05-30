@@ -64,6 +64,9 @@ Date: 30/05/2022
 
 - Began work on the shooting function.
 - Added a fire bullet function to the scythe that traces a line to other pawns, creating some sparks if an enemy is found.
+- Added a sound effect and animation to the shooting function.
+- Restricted the shooting function to only be usable when not doing other things.
+- Moved the shooting function into a newly created parent class for the scythe.
 ------------------------------------------------------------------------------------------------------------------------------------
 Date:
 

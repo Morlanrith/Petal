@@ -47,6 +47,8 @@ public:
 		bool IsLockedOn = false;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		bool IsPetalBursting = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		bool IsShooting = false;
 	bool NextHeavy = false;
 	int32 AttackCounter = 0;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
