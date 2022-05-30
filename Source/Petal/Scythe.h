@@ -26,6 +26,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		bool CanHit = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		TArray<ABasicEnemy*> CurrentEnemies;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		AMainCharacter* ParentPlayer;
 	UFUNCTION(BlueprintCallable)
 		void ShootBullet(FVector playerPos, UAnimMontage* fireAnim, UParticleSystem* sparkFX);
