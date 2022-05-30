@@ -60,6 +60,11 @@ Date: 27/05/2022
 - Allowed the player to pass through enemies when using the dodge ability.
 - Rebound the hotkey for the dodge ability on keyboard, to fix and issue with recognising the input (gamepad is unchanged).
 ------------------------------------------------------------------------------------------------------------------------------------
+Date: 30/05/2022
+
+- Began work on the shooting function.
+- Added a fire bullet function to the scythe that traces a line to other pawns, creating some sparks if an enemy is found.
+------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
 
