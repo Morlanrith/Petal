@@ -49,6 +49,8 @@ public:
 		bool IsPetalBursting = false;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		bool IsShooting = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		bool IsAiming = false;
 	bool NextHeavy = false;
 	int32 AttackCounter = 0;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
@@ -73,6 +75,10 @@ public:
 		void LookUp(float axis);
 	UFUNCTION(BlueprintCallable)
 		void LookRight(float axis);
+	UFUNCTION(BlueprintCallable)
+		void StartAiming();
+	UFUNCTION(BlueprintCallable)
+		void StopAiming();
 	void PlayAttackAnim(int AnimID, int counter, float playRate = 1.0f, float hitBoxScale = 2.0f, int swingingForce = 300, int forwardStep = 600, float upwardForce = 0.0f);
 
 };

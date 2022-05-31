@@ -68,6 +68,12 @@ Date: 30/05/2022
 - Restricted the shooting function to only be usable when not doing other things.
 - Moved the shooting function into a newly created parent class for the scythe.
 ------------------------------------------------------------------------------------------------------------------------------------
+Date: 31/05/2022
+
+- Began working on the "aiming" mode for the shooting function.
+- This mode should transition the gameplay into something similar to a third person shooter, until the player chooses to switch back.
+- Currently have basic animations implemented for aiming in this mode.
+------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
 

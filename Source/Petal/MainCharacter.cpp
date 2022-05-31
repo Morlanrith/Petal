@@ -66,7 +66,7 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 }
 
 void AMainCharacter::PlayAttackMontage(bool isHeavy) {
-	if (IsPetalBursting || IsShooting) return;
+	if (IsPetalBursting || IsShooting || IsAiming) return;
 	else if (IsCharging) {
 		if (isHeavy) {
 			IsAttacking = true;
@@ -129,7 +129,7 @@ void AMainCharacter::PlayAttackCombo() {
 }
 
 void AMainCharacter::StartPetalBurst(float forwardScale, float rightScale) {
-	if (IsPetalBursting || IsAttacking || IsCharging || IsDashing || IsShooting || this->GetMovementComponent()->IsFalling()) return;
+	if (IsPetalBursting || IsAttacking || IsCharging || IsDashing || IsShooting || IsAiming || this->GetMovementComponent()->IsFalling()) return;
 	IsPetalBursting = true;
 	this->PlayAnimMontage(LoadObject<UAnimMontage>(NULL, UTF8_TO_TCHAR("AnimMontage'/Game/PetalContent/Animation/Player/Animations/Movement/xbot_PetalBurst.xbot_PetalBurst'")), 2.0f);
 	if (forwardScale || rightScale) {
@@ -178,3 +178,12 @@ void AMainCharacter::HeavyCharge(UAnimMontage* startAnim) {
 	IsAttacking = true;
 }
 
+void AMainCharacter::StartAiming() {
+	if (IsPetalBursting || IsAttacking || IsCharging || IsDashing || IsShooting || this->GetMovementComponent()->IsFalling()) return;
+	IsAiming = true;
+}
+
+void AMainCharacter::StopAiming() {
+	if (!IsAiming) return;
+	IsAiming = false;
+}
