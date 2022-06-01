@@ -53,9 +53,14 @@ void AMainCharacter::Tick(float DeltaTime)
 
 		ClosestTarget->TargetingReticle->SetVisibility(true);
 	}
+	else if (IsAiming) {
+		GetMesh()->SetWorldRotation(UKismetMathLibrary::RInterpTo(GetMesh()->GetComponentRotation(), FRotator(0.0f, CameraArm->GetComponentRotation().Yaw - 90.0f, 0.0f), DeltaTime, 20.0f));
+	}
 	else if (GetCharacterMovement()->GetLastInputVector() != FVector(0,0,0)) {
 		GetMesh()->SetWorldRotation(UKismetMathLibrary::RInterpTo(GetMesh()->GetComponentRotation(), FRotator(0.0f, GetCharacterMovement()->Velocity.Rotation().Yaw - 90.0f, 0.0f), DeltaTime, IsCharging? 10.0f : 20.0f));
-	}	
+	}
+	CameraArm->TargetArmLength = UKismetMathLibrary::FInterpTo(CameraArm->TargetArmLength, IsAiming ? 150.0f : 450.0f, DeltaTime, 30.0f);
+	CameraArm->SocketOffset.Z = UKismetMathLibrary::FInterpTo(CameraArm->SocketOffset.Z, IsAiming ? 150.0f : 120.0f, DeltaTime, 30.0f);
 }
 
 // Called to bind functionality to input
@@ -129,7 +134,7 @@ void AMainCharacter::PlayAttackCombo() {
 }
 
 void AMainCharacter::StartPetalBurst(float forwardScale, float rightScale) {
-	if (IsPetalBursting || IsAttacking || IsCharging || IsDashing || IsShooting || IsAiming || this->GetMovementComponent()->IsFalling()) return;
+	if (IsPetalBursting || IsAttacking || IsCharging || IsDashing || IsShooting || this->GetMovementComponent()->IsFalling()) return;
 	IsPetalBursting = true;
 	this->PlayAnimMontage(LoadObject<UAnimMontage>(NULL, UTF8_TO_TCHAR("AnimMontage'/Game/PetalContent/Animation/Player/Animations/Movement/xbot_PetalBurst.xbot_PetalBurst'")), 2.0f);
 	if (forwardScale || rightScale) {
@@ -169,7 +174,7 @@ void AMainCharacter::LookRight(float axis) {
 
 void AMainCharacter::HeavyCharge(UAnimMontage* startAnim) {
 	if (AttackCounter <= 0 && IsAttacking) return;
-	if (AttackCounter > 0 || this->GetMovementComponent()->IsFalling() || IsSprinting) {
+	if (AttackCounter > 0 || this->GetMovementComponent()->IsFalling() || IsSprinting || IsPetalBursting || IsAiming) {
 		PlayAttackMontage(true);
 		return;
 	}

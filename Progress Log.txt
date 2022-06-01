@@ -74,6 +74,10 @@ Date: 31/05/2022
 - This mode should transition the gameplay into something similar to a third person shooter, until the player chooses to switch back.
 - Currently have basic animations implemented for aiming in this mode.
 ------------------------------------------------------------------------------------------------------------------------------------
+Date: 01/06/2022
+
+- Adjusted camera to move closer to, and stay behind, the player when they are aiming.
+------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
 
