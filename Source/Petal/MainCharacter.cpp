@@ -159,10 +159,11 @@ void AMainCharacter::PlayAttackAnim(int AnimID, int counter, float playRate, flo
 void AMainCharacter::LookUp(float axis) {
 	if (IsLockedOn) return;
 	FRotator currentRotation = CameraArm->GetComponentRotation();
-	if ((currentRotation.Pitch > -20.0f && axis > 0.0f) || (currentRotation.Pitch < 8.0f && axis < 0.0f)) { // Prevent looking too far up or down
-		currentRotation.Pitch -= axis;
-		CameraArm->SetWorldRotation(currentRotation);
-	}
+	currentRotation.Pitch -= axis;
+	// Prevent looking too far up or down
+	if (currentRotation.Pitch < -20.0f) currentRotation.Pitch = -20.0f;
+	else if (currentRotation.Pitch > 8.0f) currentRotation.Pitch = 8.0f;
+	CameraArm->SetWorldRotation(currentRotation);
 }
 
 void AMainCharacter::LookRight(float axis) {
