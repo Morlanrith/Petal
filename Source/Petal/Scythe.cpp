@@ -26,7 +26,7 @@ void AScythe::Tick(float DeltaTime)
 }
 
 void AScythe::ShootBullet(FVector playerPos, UAnimMontage* fireAnim, UParticleSystem* sparkFX) {
-	if (ParentPlayer->IsPetalBursting || ParentPlayer->IsAttacking || ParentPlayer->IsCharging || ParentPlayer->IsDashing || ParentPlayer->IsShooting || ParentPlayer->GetMovementComponent()->IsFalling()) return;
+	if (ParentPlayer->IsPetalBursting || ParentPlayer->IsAttacking || ParentPlayer->IsCharging || ParentPlayer->IsDashing || ParentPlayer->IsShooting) return;
 	ParentPlayer->IsShooting = true;
 	ParentPlayer->PlayAnimMontage(fireAnim);
 	FHitResult hResult;

@@ -70,7 +70,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void PlayAttackCombo();
 	UFUNCTION(BlueprintCallable)
-		void HeavyCharge(UAnimMontage* startAnim);
+		bool HeavyCharge(UAnimMontage* startAnim);
 	UFUNCTION(BlueprintCallable)
 		void LookUp(float axis);
 	UFUNCTION(BlueprintCallable)

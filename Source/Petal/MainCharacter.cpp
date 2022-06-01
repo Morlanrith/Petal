@@ -173,15 +173,16 @@ void AMainCharacter::LookRight(float axis) {
 	CameraArm->SetWorldRotation(currentRotation);
 }
 
-void AMainCharacter::HeavyCharge(UAnimMontage* startAnim) {
-	if (AttackCounter <= 0 && IsAttacking) return;
-	if (AttackCounter > 0 || this->GetMovementComponent()->IsFalling() || IsSprinting || IsPetalBursting || IsAiming) {
+bool AMainCharacter::HeavyCharge(UAnimMontage* startAnim) {
+	if (AttackCounter <= 0 && IsAttacking) return false;
+	if (AttackCounter > 0 || this->GetMovementComponent()->IsFalling() || IsSprinting || IsPetalBursting || IsShooting || IsAiming) {
 		PlayAttackMontage(true);
-		return;
+		return false;
 	}
 	this->PlayAnimMontage(startAnim, 1.5f);
 	IsCharging = true;
 	IsAttacking = true;
+	return true;
 }
 
 void AMainCharacter::StartAiming() {
