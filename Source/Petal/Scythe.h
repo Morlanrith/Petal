@@ -32,5 +32,5 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		AMainCharacter* ParentPlayer;
 	UFUNCTION(BlueprintCallable)
-		void ShootBullet(FVector playerPos, UAnimMontage* fireAnim, UParticleSystem* sparkFX);
+		void ShootBullet(UAnimMontage* fireAnim, UParticleSystem* sparkFX);
 };

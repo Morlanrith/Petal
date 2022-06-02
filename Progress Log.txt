@@ -80,6 +80,12 @@ Date: 01/06/2022
 - Added movement animations for aiming mode.
 - Altered shooting animation to show player movement.
 ------------------------------------------------------------------------------------------------------------------------------------
+Date: 02/06/2022
+
+- Implemented firing during aiming mode.
+- Altered shooting function to hold more of the original blueprint logic.
+- Added a crosshair that appears during the aiming mode.
+------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
 

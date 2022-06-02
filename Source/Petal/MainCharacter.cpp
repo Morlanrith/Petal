@@ -188,9 +188,11 @@ bool AMainCharacter::HeavyCharge(UAnimMontage* startAnim) {
 void AMainCharacter::StartAiming() {
 	if (IsPetalBursting || IsAttacking || IsCharging || IsDashing || IsShooting || this->GetMovementComponent()->IsFalling()) return;
 	IsAiming = true;
+	AimingReticle->AddToViewport();
 }
 
 void AMainCharacter::StopAiming() {
 	if (!IsAiming) return;
 	IsAiming = false;
+	AimingReticle->RemoveFromViewport();
 }

@@ -25,17 +25,31 @@ void AScythe::Tick(float DeltaTime)
 
 }
 
-void AScythe::ShootBullet(FVector playerPos, UAnimMontage* fireAnim, UParticleSystem* sparkFX) {
+void AScythe::ShootBullet(UAnimMontage* fireAnim, UParticleSystem* sparkFX) {
 	if (ParentPlayer->IsPetalBursting || ParentPlayer->IsAttacking || ParentPlayer->IsCharging || ParentPlayer->IsDashing || ParentPlayer->IsShooting) return;
 	ParentPlayer->IsShooting = true;
 	ParentPlayer->PlayAnimMontage(fireAnim);
+
 	FHitResult hResult;
 	FCollisionQueryParams params = FCollisionQueryParams();
 	params.AddIgnoredActor(ParentPlayer);
+	FVector startLocation, startForward;
+
+	if (ParentPlayer->IsAiming) {
+		FVector cameraLocation = ParentPlayer->CameraArm->GetChildComponent(0)->GetComponentLocation();
+		FVector cameraForward = ParentPlayer->CameraArm->GetChildComponent(0)->GetForwardVector();
+		startLocation = cameraLocation + (150.0f * cameraForward);
+		startForward = cameraForward;
+	}
+	else {
+		startLocation = GetActorLocation();
+		startForward = ParentPlayer->GetMesh()->GetRightVector();
+	}
+
 	if (GetWorld()->LineTraceSingleByObjectType(
 		hResult,
-		GetActorTransform().GetLocation(),
-		GetActorTransform().GetLocation() + (playerPos*5000.0f),
+		startLocation,
+		startLocation + (startForward*5000.0f),
 		FCollisionObjectQueryParams(ECollisionChannel::ECC_Pawn),
 		params)) {
 

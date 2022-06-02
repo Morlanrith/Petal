@@ -51,6 +51,8 @@ public:
 		bool IsShooting = false;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		bool IsAiming = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		UUserWidget* AimingReticle;
 	bool NextHeavy = false;
 	int32 AttackCounter = 0;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
