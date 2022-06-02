@@ -186,13 +186,26 @@ bool AMainCharacter::HeavyCharge(UAnimMontage* startAnim) {
 }
 
 void AMainCharacter::StartAiming() {
-	if (IsPetalBursting || IsAttacking || IsCharging || IsDashing || IsShooting || this->GetMovementComponent()->IsFalling()) return;
+	if (IsPetalBursting || IsAttacking || IsCharging || IsDashing || IsShooting || IsLockedOn) return;
 	IsAiming = true;
 	AimingReticle->AddToViewport();
+	GetCharacterMovement()->MaxWalkSpeed = 500.0f;
+	IsSprinting = false;
 }
 
 void AMainCharacter::StopAiming() {
 	if (!IsAiming) return;
 	IsAiming = false;
 	AimingReticle->RemoveFromViewport();
+}
+
+void AMainCharacter::LockOn() {
+	if (IsAiming) return;
+	ClosestTarget = TargetingOrb->FindClosestEnemy(GetCapsuleComponent()->GetComponentLocation());
+	IsLockedOn = true;
+}
+
+void AMainCharacter::LockOff() {
+	IsLockedOn = false;
+	if (ClosestTarget) ClosestTarget->TargetingReticle->SetVisibility(false);
 }

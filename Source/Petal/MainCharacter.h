@@ -81,6 +81,10 @@ public:
 		void StartAiming();
 	UFUNCTION(BlueprintCallable)
 		void StopAiming();
+	UFUNCTION(BlueprintCallable)
+		void LockOn();
+	UFUNCTION(BlueprintCallable)
+		void LockOff();
 	void PlayAttackAnim(int AnimID, int counter, float playRate = 1.0f, float hitBoxScale = 2.0f, int swingingForce = 300, int forwardStep = 600, float upwardForce = 0.0f);
 
 };

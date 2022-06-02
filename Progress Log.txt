@@ -85,6 +85,8 @@ Date: 02/06/2022
 - Implemented firing during aiming mode.
 - Altered shooting function to hold more of the original blueprint logic.
 - Added a crosshair that appears during the aiming mode.
+- Prevented sprinting during aiming mode.
+- Prevented lock-on and aiming mode being active at the same time.
 ------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
