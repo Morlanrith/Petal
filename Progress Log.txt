@@ -88,6 +88,12 @@ Date: 02/06/2022
 - Prevented sprinting during aiming mode.
 - Prevented lock-on and aiming mode being active at the same time.
 ------------------------------------------------------------------------------------------------------------------------------------
+Date: 06/06/2022
+
+- Overhauled the use of many different boolean integers for the player character. Now, these values are held as a TArray (BusyChecks)
+which cannot be accessed directly, instead only by a set of functions (IsBusy, IsBusyMulti, and SetBusy).
+- Added comments to code about the player character, to help illustrate which values are being checked and why.
+------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
 

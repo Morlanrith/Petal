@@ -26,8 +26,9 @@ void AScythe::Tick(float DeltaTime)
 }
 
 void AScythe::ShootBullet(UAnimMontage* fireAnim, UParticleSystem* sparkFX) {
-	if (ParentPlayer->IsPetalBursting || ParentPlayer->IsAttacking || ParentPlayer->IsCharging || ParentPlayer->IsDashing || ParentPlayer->IsShooting) return;
-	ParentPlayer->IsShooting = true;
+	// Will not work if the player chracter is attacking, charging, dashing, petal bursting, or shooting
+	if (ParentPlayer->IsBusyMulti({ 0, 1, 3, 5, 6 })) return;
+	ParentPlayer->SetBusy(6, true); // Shooting is now true
 	ParentPlayer->PlayAnimMontage(fireAnim);
 
 	FHitResult hResult;
@@ -35,7 +36,7 @@ void AScythe::ShootBullet(UAnimMontage* fireAnim, UParticleSystem* sparkFX) {
 	params.AddIgnoredActor(ParentPlayer);
 	FVector startLocation, startForward;
 
-	if (ParentPlayer->IsAiming) {
+	if (ParentPlayer->IsBusy(7)) { // If the player is aiming
 		FVector cameraLocation = ParentPlayer->CameraArm->GetChildComponent(0)->GetComponentLocation();
 		FVector cameraForward = ParentPlayer->CameraArm->GetChildComponent(0)->GetForwardVector();
 		startLocation = cameraLocation + (150.0f * cameraForward);
