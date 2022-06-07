@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CharacterStats.h"
 #include "GameFramework/Character.h"
 #include <Runtime/UMG/Public/Components/WidgetComponent.h>
 #include "BasicEnemy.generated.h"
@@ -26,6 +27,8 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		UCharacterStats* EnemyStats;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		USoundBase* HitSound;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

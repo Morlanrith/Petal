@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "BasicEnemy.h"
 #include "VisionOrb.h"
+#include "CharacterStats.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -37,6 +38,8 @@ public:
 	bool SaveAttack = false;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		UUserWidget* AimingReticle;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		class UCharacterStats* PlayerStats;
 	bool NextHeavy = false;
 	int32 AttackCounter = 0;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)

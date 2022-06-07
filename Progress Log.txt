@@ -94,6 +94,10 @@ Date: 06/06/2022
 which cannot be accessed directly, instead only by a set of functions (IsBusy, IsBusyMulti, and SetBusy).
 - Added comments to code about the player character, to help illustrate which values are being checked and why.
 ------------------------------------------------------------------------------------------------------------------------------------
+Date: 07/06/2022
+
+- Began work on stats for players and enemies, starting with health values.
+------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
 

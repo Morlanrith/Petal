@@ -23,13 +23,15 @@ AMainCharacter::AMainCharacter()
 		8 = Recovering
 	*/
 	BusyChecks.Init(false, 9);
+	PlayerStats = CreateDefaultSubobject<UCharacterStats>(TEXT("Player Stats"));
+	AddOwnedComponent(PlayerStats);
+	PlayerStats->SetHealth(10);
 }
 
 // Called when the game starts or when spawned
 void AMainCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
