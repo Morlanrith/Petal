@@ -43,6 +43,8 @@ public:
 	bool NextHeavy = false;
 	int32 AttackCounter = 0;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		int32 CurrentDamage = 0;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		int32 SwingingForce = 0;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		float ScytheScale = 2.0f;
@@ -78,6 +80,6 @@ public:
 		void LockOn();
 	UFUNCTION(BlueprintCallable)
 		void LockOff();
-	void PlayAttackAnim(int AnimID, int counter, float playRate = 1.0f, float hitBoxScale = 2.0f, int swingingForce = 300, int forwardStep = 600, float upwardForce = 0.0f);
+	void PlayAttackAnim(int AnimID, int counter, int damage, float playRate = 1.0f, float hitBoxScale = 2.0f, int swingingForce = 300, int forwardStep = 600, float upwardForce = 0.0f);
 
 };

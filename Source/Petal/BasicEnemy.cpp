@@ -2,6 +2,7 @@
 
 
 #include "BasicEnemy.h"
+#include "HealthBar.h"
 #include <Runtime/Engine/Classes/Kismet/GameplayStatics.h>
 
 // Sets default values
@@ -11,14 +12,13 @@ ABasicEnemy::ABasicEnemy()
 	PrimaryActorTick.bCanEverTick = true;
 	EnemyStats = CreateDefaultSubobject<UCharacterStats>(TEXT("Enemy Stats"));
 	AddOwnedComponent(EnemyStats);
-	EnemyStats->SetHealth(5);
 }
 
 // Called when the game starts or when spawned
 void ABasicEnemy::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	EnemyStats->SetHealth(MaxHealth);
 }
 
 // Called every frame
@@ -35,7 +35,12 @@ void ABasicEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 
 }
 
-void ABasicEnemy::HitReaction(FVector backwardsVelocity) {
+void ABasicEnemy::HitReaction(FVector backwardsVelocity, int32 damage) {
 	UGameplayStatics::PlaySound2D(this->GetWorld(),this->HitSound);
-	this->LaunchCharacter(backwardsVelocity,false,false);
+	if (EnemyStats->TakeDamage(damage)) {
+		Cast<UHealthBar>(this->HealthBar->GetWidget())->AdjustBar((float)EnemyStats->GetHealth() / MaxHealth);
+		this->LaunchCharacter(backwardsVelocity, false, false);
+	}
+	else
+		this->Destroy();
 }

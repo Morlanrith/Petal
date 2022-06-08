@@ -111,7 +111,7 @@ void AMainCharacter::PlayAttackMontage(bool isHeavy) {
 	else if (IsBusy(1)) { // If charging
 		if (isHeavy) {
 			SetBusy(0, true);
-			PlayAttackAnim(4, -1, 1.25f, 2.0f + (0.5f * ChargeMultiplier), 350 * ChargeMultiplier, 0, 350.0f);
+			PlayAttackAnim(4, -1, 2, 1.25f, 2.0f + (0.5f * ChargeMultiplier), 350 * ChargeMultiplier, 0, 350.0f);
 		}
 		return;
 	}
@@ -124,13 +124,13 @@ void AMainCharacter::PlayAttackMontage(bool isHeavy) {
 		SetBusy(0, true); // Attacking is now true
 		if (this->GetMovementComponent()->IsFalling()) {
 			this->LaunchCharacter(FVector(0.0f, 0.0f, 500.0f), true, true);
-			if (!isHeavy) PlayAttackAnim(9, 4, 2.5f, 2.5f, 0, 0, 600.0f);
-			else PlayAttackAnim(12, -1, 2.0f, 3.0f, 0, 0, -1500.0f);
+			if (!isHeavy) PlayAttackAnim(9, 4, 1, 2.5f, 2.5f, 0, 0, 600.0f);
+			else PlayAttackAnim(12, -1, 2, 2.0f, 3.0f, 0, 0, -1500.0f);
 		}
 		else if (IsBusy(2)) { // If the player is sprinting
-			isHeavy ? PlayAttackAnim(5, -1, 1.5f, 2.5f, 800, 0, 350.0f) : PlayAttackAnim(3, -1, 2.0f, 2.5f, 600, 6000, 250.0f);
+			isHeavy ? PlayAttackAnim(5, -1, 2, 1.5f, 2.5f, 800, 0, 350.0f) : PlayAttackAnim(3, -1, 1, 2.0f, 2.5f, 600, 6000, 250.0f);
 		}
-		else PlayAttackAnim(0, 1, 2.0f);
+		else PlayAttackAnim(0, 1, 1, 2.0f);
 	}
 }
 
@@ -138,27 +138,27 @@ void AMainCharacter::PlayAttackCombo() {
 	if (SaveAttack && AttackCounter != -1) {
 		switch (AttackCounter) {
 			case 1:
-				NextHeavy ? PlayAttackAnim(7, 3, 1.75f, 2.0f, 0, 0, 750.0f) : PlayAttackAnim(1, 2, 2.0f);
+				NextHeavy ? PlayAttackAnim(7, 3, 1, 1.75f, 2.0f, 0, 0, 750.0f) : PlayAttackAnim(1, 2, 1, 2.0f);
 				return;
 			case 2:
-				NextHeavy ? PlayAttackAnim(6, -1, 2.0f, 2.5f, 800, 600, 250.0f) : PlayAttackAnim(2, -1, 2.0f, 3.0f, 800);
+				NextHeavy ? PlayAttackAnim(6, -1, 3, 2.0f, 2.5f, 800, 600, 250.0f) : PlayAttackAnim(2, -1, 2, 2.0f, 3.0f, 800);
 				return;
 			case 3:
 				if (NextHeavy) {
 					this->LaunchCharacter(FVector(0.0f, 0.0f, 1000.0f), false, false);
-					PlayAttackAnim(8, -1, 2.0f, 2.5f, 0, 0, 500.0f);
+					PlayAttackAnim(8, -1, 2, 2.0f, 2.5f, 0, 0, 500.0f);
 					return;
 				}
 				else break;
 			case 4:
 				if (!this->GetMovementComponent()->IsFalling()) break;
 				this->LaunchCharacter(FVector(0.0f, 0.0f, 500.0f), true, true);
-				NextHeavy ? PlayAttackAnim(12, -1, 2.0f, 3.0f, 0, 0, -1500.0f) : PlayAttackAnim(10, 5, 1.5f, 2.5f, 0, 0, 600.0f);
+				NextHeavy ? PlayAttackAnim(12, -1, 2, 2.0f, 3.0f, 0, 0, -1500.0f) : PlayAttackAnim(10, 5, 1, 1.5f, 2.5f, 0, 0, 600.0f);
 				return;
 			case 5:
 				if (!this->GetMovementComponent()->IsFalling()) break;
 				this->LaunchCharacter(FVector(0.0f, 0.0f, 500.0f), true, true);
-				NextHeavy ? PlayAttackAnim(12, -1, 2.0f, 3.0f, 0, 0, -1500.0f) : PlayAttackAnim(11, -1, 2.0f, 2.5f, 800, 0, 600.0f);
+				NextHeavy ? PlayAttackAnim(12, -1, 2, 2.0f, 3.0f, 0, 0, -1500.0f) : PlayAttackAnim(11, -1, 2, 2.0f, 2.5f, 800, 0, 600.0f);
 				return;
 		}
 	}
@@ -183,8 +183,9 @@ void AMainCharacter::StartPetalBurst(float forwardScale, float rightScale) {
 	}
 }
 
-void AMainCharacter::PlayAttackAnim(int AnimID, int counter, float playRate, float hitBoxScale, int swingingForce, int forwardStep, float upwardForce) {
+void AMainCharacter::PlayAttackAnim(int AnimID, int counter, int damage, float playRate, float hitBoxScale, int swingingForce, int forwardStep, float upwardForce) {
 	SaveAttack = false;
+	CurrentDamage = damage;
 	SwingingForce = swingingForce;
 	AttackCounter = counter;
 	UpwardForce = upwardForce;

@@ -30,10 +30,14 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		UCharacterStats* EnemyStats;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int32 MaxHealth;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		USoundBase* HitSound;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		UWidgetComponent* TargetingReticle;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UWidgetComponent* HealthBar;
 	UFUNCTION(BlueprintCallable)
-		void HitReaction(FVector backwardsVelocity);
+		void HitReaction(FVector backwardsVelocity, int32 damage);
 
 };
