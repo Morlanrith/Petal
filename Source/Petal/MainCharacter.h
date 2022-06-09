@@ -12,6 +12,30 @@
 #include "Components/CapsuleComponent.h"
 #include "MainCharacter.generated.h"
 
+USTRUCT(BlueprintType)
+struct FAttackStruct
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack Struct")
+		UAnimMontage* Anim;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack Struct")
+		int32 AttackCounter;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack Struct")
+		int32 Damage;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack Struct")
+		float PlayRate;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack Struct")
+		int32 SwingingForce;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack Struct")
+		int32 ForwardStep;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack Struct")
+		float UpwardForce;
+
+	FAttackStruct();
+};
+
+
 UCLASS()
 class PETAL_API AMainCharacter : public ACharacter
 {
@@ -31,6 +55,8 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TArray<FAttackStruct> PlayerAttacks;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		AVisionOrb* TargetingOrb;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
@@ -80,6 +106,5 @@ public:
 		void LockOn();
 	UFUNCTION(BlueprintCallable)
 		void LockOff();
-	void PlayAttackAnim(int AnimID, int counter, int damage, float playRate = 1.0f, float hitBoxScale = 2.0f, int swingingForce = 300, int forwardStep = 600, float upwardForce = 0.0f);
-
+	void PlayAttackAnim(int index);
 };
