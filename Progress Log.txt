@@ -104,6 +104,10 @@ Date: 08/06/2022
 - Added specific damage amounts for each of the players attacks (although, this should be changed in the future).
 - Began adding a health bar that displays when an enemy is hit (currently does not disappear, will fix this next).
 ------------------------------------------------------------------------------------------------------------------------------------
+Date: 09/06/2022
+
+- Made health bar disappear if the target has not been hit for 3 seconds.
+------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
 

@@ -12,8 +12,10 @@ UCLASS()
 class PETAL_API UHealthBar : public UUserWidget
 {
 	GENERATED_BODY()
-
+protected:
+	float HealthTimer = 3.0f;
 public:
+	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		UProgressBar* thisHealthBar;
 	void AdjustBar(float newPercent);
