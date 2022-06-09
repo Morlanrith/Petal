@@ -109,6 +109,7 @@ Date: 09/06/2022
 - Made health bar disappear if the target has not been hit for 3 seconds.
 - Overhauled attack system to now have the player store the properties of each attack along with their animations, as opposed to
 holding their properties directly in code.
+- Changed access levels for most of the players variables to be protected (formerly public).
 ------------------------------------------------------------------------------------------------------------------------------------
 Date:
 

@@ -48,7 +48,6 @@ void AMainCharacter::BeginPlay()
 void AMainCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (IsBusy(1) && ChargeMultiplier < 3.0f) ChargeMultiplier += DeltaTime; // If the player is charging an attack, increase its attack multiplier
 	if (IsBusyMulti({ 3, 5 })) { // If the player is either dashing or petal bursting
 		AddMovementInput(UKismetMathLibrary::GetForwardVector(FRotator(0.0f, GetMesh()->GetComponentRotation().Yaw + 90.0f, 0.0f)));
 	}
@@ -172,7 +171,6 @@ void AMainCharacter::PlayAttackCombo() {
 		}
 	}
 	AttackCounter = 0;
-	ChargeMultiplier = 0.5f;
 	SetBusy(0, false); // Attacking is now false
 	SaveAttack = false;
 	NextHeavy = false;
@@ -194,12 +192,9 @@ void AMainCharacter::StartPetalBurst(float forwardScale, float rightScale) {
 
 void AMainCharacter::PlayAttackAnim(int index) {
 	SaveAttack = false;
-	CurrentDamage = PlayerAttacks[index].Damage;
-	SwingingForce = PlayerAttacks[index].SwingingForce;
-	if (index == 4) SwingingForce *= ChargeMultiplier;
+	CurrentAttack = index;
+	//if (index == 4) SwingingForce *= ChargeMultiplier;
 	AttackCounter = PlayerAttacks[index].AttackCounter;
-	UpwardForce = PlayerAttacks[index].UpwardForce;
-
 	if (PlayerAttacks[index].ForwardStep > 0) this->LaunchCharacter(UKismetMathLibrary::GetForwardVector(FRotator(0.0f, GetMesh()->GetComponentRotation().Yaw + 90.0f, 0.0f)) * PlayerAttacks[index].ForwardStep, false, false);
 	this->PlayAnimMontage(PlayerAttacks[index].Anim, PlayerAttacks[index].PlayRate);
 }
@@ -256,4 +251,8 @@ void AMainCharacter::LockOn() {
 void AMainCharacter::LockOff() {
 	SetBusy(4, false); // Locked on is now false
 	if (ClosestTarget) ClosestTarget->TargetingReticle->SetVisibility(false);
+}
+
+FAttackStruct AMainCharacter::GetCurrentAttack() {
+	return PlayerAttacks[CurrentAttack];
 }

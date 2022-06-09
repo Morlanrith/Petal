@@ -47,45 +47,21 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	float ChargeMultiplier = 0.5f;
 	TArray<bool> BusyChecks;
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	int AttackCounter = 0;
+	int CurrentAttack = 0;
+	bool NextHeavy = false;
+	bool SaveAttack = false;
+	class UCharacterStats* PlayerStats;
+	ABasicEnemy* ClosestTarget;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TArray<FAttackStruct> PlayerAttacks;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		AVisionOrb* TargetingOrb;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		USpringArmComponent* CameraArm;
-	bool SaveAttack = false;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		UUserWidget* AimingReticle;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		class UCharacterStats* PlayerStats;
-	bool NextHeavy = false;
-	int32 AttackCounter = 0;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		int32 CurrentDamage = 0;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		int32 SwingingForce = 0;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		float ScytheScale = 2.0f;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		float UpwardForce = 0.0f;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		TArray<UAnimMontage*> AttackMontages;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		ABasicEnemy* ClosestTarget;
-	UFUNCTION(BlueprintCallable)
-		bool IsBusy(int32 checkValue);
-	UFUNCTION(BlueprintCallable)
-		bool IsBusyMulti(TArray<int32> checkValues);
-	UFUNCTION(BlueprintCallable)
-		void SetBusy(int32 valueType, bool newValue);
+		AVisionOrb* TargetingOrb;
+
+	void PlayAttackAnim(int index);
 	UFUNCTION(BlueprintCallable)
 		void StartPetalBurst(float forwardScale, float rightScale);
 	UFUNCTION(BlueprintCallable)
@@ -106,5 +82,20 @@ public:
 		void LockOn();
 	UFUNCTION(BlueprintCallable)
 		void LockOff();
-	void PlayAttackAnim(int index);
+public:	
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
+	// Called to bind functionality to input
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		USpringArmComponent* CameraArm;
+	UFUNCTION(BlueprintCallable)
+		bool IsBusy(int32 checkValue);
+	UFUNCTION(BlueprintCallable)
+		bool IsBusyMulti(TArray<int32> checkValues);
+	UFUNCTION(BlueprintCallable)
+		void SetBusy(int32 valueType, bool newValue);
+	UFUNCTION(BlueprintCallable)
+		FAttackStruct GetCurrentAttack();
 };

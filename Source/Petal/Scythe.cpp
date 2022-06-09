@@ -22,7 +22,11 @@ void AScythe::BeginPlay()
 void AScythe::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	if (ParentPlayer->IsBusy(1) && ChargeMultiplier < 5.0f) ChargeMultiplier += DeltaTime; // If the player is charging an attack, increase its attack multiplier
+	else if (!ParentPlayer->IsBusy(0) && CurrentEnemies.Num() > 0) {
+		CurrentEnemies.Empty();
+		ChargeMultiplier = 1.0f;
+	}
 }
 
 void AScythe::ShootBullet(UAnimMontage* fireAnim, UParticleSystem* sparkFX) {
