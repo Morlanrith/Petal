@@ -257,8 +257,8 @@ FAttackStruct AMainCharacter::GetCurrentAttack() {
 	return PlayerAttacks[CurrentAttack];
 }
 
-void AMainCharacter::TakeDamage(int32 damage) {
+void AMainCharacter::DamagePlayer(int32 damage) {
 	if (!damage) return;
-	PlayerStats->TakeDamage(damage);
+	PlayerStats->ReduceHealth(damage);
 	PlayerUI->AdjustHealth((float)PlayerStats->GetHealth() / MaxHealth);
 }

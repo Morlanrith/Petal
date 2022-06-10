@@ -29,7 +29,7 @@ void AScythe::Tick(float DeltaTime)
 	}
 }
 
-void AScythe::ShootBullet(UAnimMontage* fireAnim, UParticleSystem* sparkFX) {
+void AScythe::ShootBullet(UAnimMontage* fireAnim, UParticleSystem* sparkFX, int32 damage) {
 	// Will not work if the player chracter is attacking, charging, dashing, petal bursting, or shooting
 	if (ParentPlayer->IsBusyMulti({ 0, 1, 3, 5, 6 })) return;
 	ParentPlayer->SetBusy(6, true); // Shooting is now true
@@ -60,6 +60,7 @@ void AScythe::ShootBullet(UAnimMontage* fireAnim, UParticleSystem* sparkFX) {
 
 		if (!Cast<ABasicEnemy>(hResult.Actor)) return;
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), sparkFX, FTransform(hResult.Location));
+		Cast<ABasicEnemy>(hResult.Actor)->HitReaction(FVector(0,0,0),damage,false);
 	}
 }
 

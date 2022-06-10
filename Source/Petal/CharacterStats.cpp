@@ -43,7 +43,7 @@ int32 UCharacterStats::GetHealth() {
 	return 0;
 }
 
-bool UCharacterStats::TakeDamage(int damageAmount) {
+bool UCharacterStats::ReduceHealth(int damageAmount) {
 	CurrentHealth -= damageAmount;
 	if (CurrentHealth <= 0) return false;
 	return true;

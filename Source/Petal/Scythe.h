@@ -23,16 +23,16 @@ protected:
 	virtual void BeginPlay() override;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		float ChargeMultiplier = 1.0f;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		bool CanHit = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		TArray<ABasicEnemy*> CurrentEnemies;
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		bool CanHit = false;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		TArray<ABasicEnemy*> CurrentEnemies;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		AMainCharacter* ParentPlayer;
 	UFUNCTION(BlueprintCallable)
-		void ShootBullet(UAnimMontage* fireAnim, UParticleSystem* sparkFX);
+		void ShootBullet(UAnimMontage* fireAnim, UParticleSystem* sparkFX, int32 damage = 1);
 };

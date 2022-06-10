@@ -35,9 +35,9 @@ void ABasicEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 
 }
 
-void ABasicEnemy::HitReaction(FVector backwardsVelocity, int32 damage) {
-	UGameplayStatics::PlaySound2D(this->GetWorld(),this->HitSound);
-	if (EnemyStats->TakeDamage(damage)) {
+void ABasicEnemy::HitReaction(FVector backwardsVelocity, int32 damage, bool melee) {
+	if(melee) UGameplayStatics::PlaySound2D(this->GetWorld(),this->HitSound);
+	if (EnemyStats->ReduceHealth(damage)) {
 		Cast<UHealthBar>(this->HealthBar->GetWidget())->AdjustBar((float)EnemyStats->GetHealth() / MaxHealth);
 		this->LaunchCharacter(backwardsVelocity, false, false);
 	}

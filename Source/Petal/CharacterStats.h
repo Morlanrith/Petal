@@ -29,7 +29,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 		int32 GetHealth();
 	UFUNCTION(BlueprintCallable)
-		bool TakeDamage(int damageAmount);
+		bool ReduceHealth(int damageAmount);
 
 		
 };

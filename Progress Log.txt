@@ -114,6 +114,8 @@ holding their properties directly in code.
 Date: 10/06/2022
 
 - Added a health bar to display the players current health. Also added a damage taking function for the player which updates this.
+- Shooting function now does damage.
+- Changed access levels for variables/functions in classes besides the player.
 ------------------------------------------------------------------------------------------------------------------------------------
 Date:
 

@@ -20,13 +20,6 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		UCharacterStats* EnemyStats;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -34,10 +27,17 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		USoundBase* HitSound;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		UWidgetComponent* TargetingReticle;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		UWidgetComponent* HealthBar;
+
+public:	
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
+	// Called to bind functionality to input
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UWidgetComponent* TargetingReticle;
 	UFUNCTION(BlueprintCallable)
-		void HitReaction(FVector backwardsVelocity, int32 damage);
+		void HitReaction(FVector backwardsVelocity, int32 damage, bool melee = true);
 
 };
