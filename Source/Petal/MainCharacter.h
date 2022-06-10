@@ -6,6 +6,7 @@
 #include "BasicEnemy.h"
 #include "VisionOrb.h"
 #include "CharacterStats.h"
+#include "Player_UI.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -60,6 +61,10 @@ protected:
 		UUserWidget* AimingReticle;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		AVisionOrb* TargetingOrb;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		UPlayer_UI* PlayerUI;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int32 MaxHealth;
 
 	void PlayAttackAnim(int index);
 	UFUNCTION(BlueprintCallable)
@@ -98,4 +103,6 @@ public:
 		void SetBusy(int32 valueType, bool newValue);
 	UFUNCTION(BlueprintCallable)
 		FAttackStruct GetCurrentAttack();
+	UFUNCTION(BlueprintCallable)
+		void TakeDamage(int32 damage);
 };

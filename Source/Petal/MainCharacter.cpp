@@ -25,7 +25,6 @@ AMainCharacter::AMainCharacter()
 	BusyChecks.Init(false, 9);
 	PlayerStats = CreateDefaultSubobject<UCharacterStats>(TEXT("Player Stats"));
 	AddOwnedComponent(PlayerStats);
-	PlayerStats->SetHealth(10);
 }
 
 FAttackStruct::FAttackStruct()
@@ -42,6 +41,7 @@ FAttackStruct::FAttackStruct()
 void AMainCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	PlayerStats->SetHealth(MaxHealth);
 }
 
 // Called every frame
@@ -255,4 +255,10 @@ void AMainCharacter::LockOff() {
 
 FAttackStruct AMainCharacter::GetCurrentAttack() {
 	return PlayerAttacks[CurrentAttack];
+}
+
+void AMainCharacter::TakeDamage(int32 damage) {
+	if (!damage) return;
+	PlayerStats->TakeDamage(damage);
+	PlayerUI->AdjustHealth((float)PlayerStats->GetHealth() / MaxHealth);
 }

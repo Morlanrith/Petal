@@ -39,7 +39,8 @@ void UCharacterStats::SetHealth(int healthAmount) {
 }
 
 int32 UCharacterStats::GetHealth() {
-	return CurrentHealth;
+	if(CurrentHealth >= 0) return CurrentHealth;
+	return 0;
 }
 
 bool UCharacterStats::TakeDamage(int damageAmount) {

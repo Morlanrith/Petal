@@ -111,6 +111,10 @@ Date: 09/06/2022
 holding their properties directly in code.
 - Changed access levels for most of the players variables to be protected (formerly public).
 ------------------------------------------------------------------------------------------------------------------------------------
+Date: 10/06/2022
+
+- Added a health bar to display the players current health. Also added a damage taking function for the player which updates this.
+------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
 
