@@ -116,6 +116,9 @@ Date: 10/06/2022
 - Added a health bar to display the players current health. Also added a damage taking function for the player which updates this.
 - Shooting function now does damage.
 - Changed access levels for variables/functions in classes besides the player.
+- Added a basic "attacking" state to the enemy, that causes the player to take damage when touching a certain area. (This is merely
+a temporary implementation of attacks for enemies, and will be overhauled with something more closely resembling the players means
+of attacking in the future.)
 ------------------------------------------------------------------------------------------------------------------------------------
 Date:
 

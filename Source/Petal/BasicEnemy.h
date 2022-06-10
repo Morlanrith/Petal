@@ -28,6 +28,10 @@ protected:
 		USoundBase* HitSound;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		UWidgetComponent* HealthBar;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		bool IsAttacking = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		bool HitPlayer = false;
 
 public:	
 	// Called every frame
