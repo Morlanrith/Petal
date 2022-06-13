@@ -258,16 +258,20 @@ FAttackStruct AMainCharacter::GetCurrentAttack() {
 	return PlayerAttacks[CurrentAttack];
 }
 
-void AMainCharacter::DamagePlayer(int32 damage, FVector backwardsVelocity) {
+void AMainCharacter::DamagePlayer(int32 damage, FVector attackLoc, float swingingForce, float upwardsForce) {
 	if (!damage || IsBusy(5)) return;
 	for(int i = 0; i<7; i++) SetBusy(i, false);
 	StopAiming();
 	PlayerStats->ReduceHealth(damage);
 	PlayerUI->AdjustHealth((float)PlayerStats->GetHealth() / MaxHealth);
-	if (backwardsVelocity.Z > 0.0f || this->GetMovementComponent()->IsFalling())
+	if (upwardsForce > 0.0f || this->GetMovementComponent()->IsFalling())
 		this->StopAnimMontage();
 	else 
 		this->PlayAnimMontage(LoadObject<UAnimMontage>(NULL, UTF8_TO_TCHAR("AnimMontage'/Game/PetalContent/Animation/Player/Animations/Movement/xbot_Impact.xbot_Impact'")), 1.5f);
-	this->LaunchCharacter(backwardsVelocity, true, backwardsVelocity.Z > 0.0f);
+
+	FVector xyVelocity = UKismetMathLibrary::GetForwardVector(UKismetMathLibrary::FindLookAtRotation(attackLoc, GetMesh()->GetComponentLocation())) * swingingForce;
+	this->LaunchCharacter(FVector(xyVelocity.X, xyVelocity.Y, upwardsForce), true, upwardsForce > 0.0f);
+	GetMesh()->SetWorldRotation(FRotator(0.0f, UKismetMathLibrary::FindLookAtRotation(GetMesh()->GetComponentLocation(), attackLoc).Yaw - 90.0f, 0.0f));
+
 	SetBusy(8, true);
 }

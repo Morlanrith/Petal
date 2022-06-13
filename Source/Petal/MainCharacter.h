@@ -104,5 +104,5 @@ public:
 	UFUNCTION(BlueprintCallable)
 		FAttackStruct GetCurrentAttack();
 	UFUNCTION(BlueprintCallable)
-		void DamagePlayer(int32 damage, FVector backwardsVelocity);
+		void DamagePlayer(int32 damage, FVector attackLoc, float swingingForce, float upwardsForce = 0.0f);
 };

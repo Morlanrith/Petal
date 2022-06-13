@@ -124,6 +124,7 @@ Date: 13/06/2022
 
 - Added a knockback element to the damage taking function for the player.
 - Implemented stagger and recovery states for the player, which activate when the player is hit.
+- Player now faces the direction of the attacker during the stagger and recovery states.
 ------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
