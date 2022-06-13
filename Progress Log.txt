@@ -120,6 +120,11 @@ Date: 10/06/2022
 a temporary implementation of attacks for enemies, and will be overhauled with something more closely resembling the players means
 of attacking in the future.)
 ------------------------------------------------------------------------------------------------------------------------------------
+Date: 13/06/2022
+
+- Added a knockback element to the damage taking function for the player.
+- Implemented stagger and recovery states for the player, which activate when the player is hit.
+------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
 

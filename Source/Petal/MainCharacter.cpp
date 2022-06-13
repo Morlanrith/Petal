@@ -48,6 +48,7 @@ void AMainCharacter::BeginPlay()
 void AMainCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	if (IsBusy(8)) return;
 	if (IsBusyMulti({ 3, 5 })) { // If the player is either dashing or petal bursting
 		AddMovementInput(UKismetMathLibrary::GetForwardVector(FRotator(0.0f, GetMesh()->GetComponentRotation().Yaw + 90.0f, 0.0f)));
 	}
@@ -116,7 +117,7 @@ void AMainCharacter::SetBusy(int32 valueType, bool newValue) {
 }
 
 void AMainCharacter::PlayAttackMontage(bool isHeavy) {
-	if (IsBusyMulti({ 5,6,7 })) return; // Will not work if the player is petal bursting, shooting, or aiming
+	if (IsBusyMulti({ 5, 6, 7, 8 })) return; // Will not work if the player is petal bursting, shooting, aiming or being hit
 	else if (IsBusy(1)) { // If charging
 		if (isHeavy) {
 			SetBusy(0, true);
@@ -143,7 +144,7 @@ void AMainCharacter::PlayAttackMontage(bool isHeavy) {
 }
 
 void AMainCharacter::PlayAttackCombo() {
-	if (SaveAttack && AttackCounter != -1) {
+	if (SaveAttack && AttackCounter != -1 && !IsBusy(8)) {
 		switch (AttackCounter) {
 			case 1:
 				PlayAttackAnim(NextHeavy ? 7 : 1);
@@ -178,7 +179,7 @@ void AMainCharacter::PlayAttackCombo() {
 
 void AMainCharacter::StartPetalBurst(float forwardScale, float rightScale) {
 	// Will not work if the player is currently attacking, charging, dashing, petal bursting, shooting, or jumping
-	if (IsBusyMulti({ 0, 1, 3, 5, 6 }) || this->GetMovementComponent()->IsFalling()) return;
+	if (IsBusyMulti({ 0, 1, 3, 5, 6, 8 }) || this->GetMovementComponent()->IsFalling()) return;
 	SetBusy(5, true); // Petal bursting is now true
 	this->PlayAnimMontage(LoadObject<UAnimMontage>(NULL, UTF8_TO_TCHAR("AnimMontage'/Game/PetalContent/Animation/Player/Animations/Movement/xbot_PetalBurst.xbot_PetalBurst'")), 2.0f);
 	if (forwardScale || rightScale) {
@@ -229,7 +230,7 @@ bool AMainCharacter::HeavyCharge(UAnimMontage* startAnim) {
 }
 
 void AMainCharacter::StartAiming() {
-	if (IsBusyMulti({ 0, 1, 3, 4, 5, 6 })) return;
+	if (IsBusyMulti({ 0, 1, 3, 4, 5, 6, 8 })) return;
 	SetBusy(7, true); // Aiming is now true
 	AimingReticle->AddToViewport();
 	GetCharacterMovement()->MaxWalkSpeed = 500.0f;
@@ -257,8 +258,16 @@ FAttackStruct AMainCharacter::GetCurrentAttack() {
 	return PlayerAttacks[CurrentAttack];
 }
 
-void AMainCharacter::DamagePlayer(int32 damage) {
-	if (!damage) return;
+void AMainCharacter::DamagePlayer(int32 damage, FVector backwardsVelocity) {
+	if (!damage || IsBusy(5)) return;
+	for(int i = 0; i<7; i++) SetBusy(i, false);
+	StopAiming();
 	PlayerStats->ReduceHealth(damage);
 	PlayerUI->AdjustHealth((float)PlayerStats->GetHealth() / MaxHealth);
+	if (backwardsVelocity.Z > 0.0f || this->GetMovementComponent()->IsFalling())
+		this->StopAnimMontage();
+	else 
+		this->PlayAnimMontage(LoadObject<UAnimMontage>(NULL, UTF8_TO_TCHAR("AnimMontage'/Game/PetalContent/Animation/Player/Animations/Movement/xbot_Impact.xbot_Impact'")), 1.5f);
+	this->LaunchCharacter(backwardsVelocity, true, backwardsVelocity.Z > 0.0f);
+	SetBusy(8, true);
 }
