@@ -126,6 +126,11 @@ Date: 13/06/2022
 - Implemented stagger and recovery states for the player, which activate when the player is hit.
 - Player now faces the direction of the attacker during the stagger and recovery states.
 ------------------------------------------------------------------------------------------------------------------------------------
+Date: 14/06/2022
+
+- Fixed recovery code to work with lock-on mode.
+- Added a "Game Over" operation that is executed when the player runs out of health (should be re-used later for the win condition).
+------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
 

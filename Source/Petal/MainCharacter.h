@@ -53,6 +53,7 @@ protected:
 	int CurrentAttack = 0;
 	bool NextHeavy = false;
 	bool SaveAttack = false;
+	bool GameOver = false;
 	class UCharacterStats* PlayerStats;
 	ABasicEnemy* ClosestTarget;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -87,6 +88,8 @@ protected:
 		void LockOn();
 	UFUNCTION(BlueprintCallable)
 		void LockOff();
+	UFUNCTION(BlueprintCallable)
+		bool IsGameOver();
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

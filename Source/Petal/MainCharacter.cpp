@@ -2,6 +2,7 @@
 
 
 #include "MainCharacter.h"
+#include "PetalGameModeBase.h"
 #include <Runtime/Engine/Classes/Kismet/KismetMathLibrary.h>
 
 // Sets default values
@@ -48,7 +49,6 @@ void AMainCharacter::BeginPlay()
 void AMainCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (IsBusy(8)) return;
 	if (IsBusyMulti({ 3, 5 })) { // If the player is either dashing or petal bursting
 		AddMovementInput(UKismetMathLibrary::GetForwardVector(FRotator(0.0f, GetMesh()->GetComponentRotation().Yaw + 90.0f, 0.0f)));
 	}
@@ -57,14 +57,17 @@ void AMainCharacter::Tick(float DeltaTime)
 			SetBusy(4, false); // Disables lock on
 			return;
 		}
-		FRotator targetTurningDirection = FRotator(GetMesh()->GetComponentRotation().Pitch, // Pitch
-													UKismetMathLibrary::FindLookAtRotation(
-														GetMesh()->GetComponentLocation(), 
-														ClosestTarget->GetActorLocation()
-													).Yaw -90.0f, // Yaw
-													GetMesh()->GetComponentRotation().Roll); // Roll
+		
+		if (!IsBusy(8)) {
+			FRotator targetTurningDirection = FRotator(GetMesh()->GetComponentRotation().Pitch, // Pitch
+				UKismetMathLibrary::FindLookAtRotation(
+					GetMesh()->GetComponentLocation(),
+					ClosestTarget->GetActorLocation()
+				).Yaw - 90.0f, // Yaw
+				GetMesh()->GetComponentRotation().Roll); // Roll
 
-		GetMesh()->SetWorldRotation(UKismetMathLibrary::RInterpTo(GetMesh()->GetComponentRotation(), targetTurningDirection, DeltaTime, 10.0f));
+			GetMesh()->SetWorldRotation(UKismetMathLibrary::RInterpTo(GetMesh()->GetComponentRotation(), targetTurningDirection, DeltaTime, 10.0f));
+		}
 
 
 		FRotator cameraTurningDirection = FRotator(0.0f, // Pitch
@@ -78,7 +81,8 @@ void AMainCharacter::Tick(float DeltaTime)
 
 		ClosestTarget->TargetingReticle->SetVisibility(true);
 	}
-	else if(IsBusy(7)) { // If the player is aiming
+	else if (IsBusy(8)) return;
+	else if (IsBusy(7)) { // If the player is aiming
 		// Adjust the player rotation to match that of the camera
 		GetMesh()->SetWorldRotation(UKismetMathLibrary::RInterpTo(GetMesh()->GetComponentRotation(), FRotator(0.0f, CameraArm->GetComponentRotation().Yaw - 90.0f, 0.0f), DeltaTime, 20.0f));
 	}
@@ -260,10 +264,19 @@ FAttackStruct AMainCharacter::GetCurrentAttack() {
 
 void AMainCharacter::DamagePlayer(int32 damage, FVector attackLoc, float swingingForce, float upwardsForce) {
 	if (!damage || IsBusy(5)) return;
-	for(int i = 0; i<7; i++) SetBusy(i, false);
+	for (int i = 0; i < 7; i++) {
+		if (i == 4) continue;
+		SetBusy(i, false);
+	}
 	StopAiming();
-	PlayerStats->ReduceHealth(damage);
+	if(!PlayerStats->ReduceHealth(damage)) GameOver = true;
 	PlayerUI->AdjustHealth((float)PlayerStats->GetHealth() / MaxHealth);
+
+	if (GameOver) {
+		((APetalGameModeBase*)GetWorld()->GetAuthGameMode())->EndGame();
+		return;
+	}
+
 	if (upwardsForce > 0.0f || this->GetMovementComponent()->IsFalling())
 		this->StopAnimMontage();
 	else 
@@ -274,4 +287,8 @@ void AMainCharacter::DamagePlayer(int32 damage, FVector attackLoc, float swingin
 	GetMesh()->SetWorldRotation(FRotator(0.0f, UKismetMathLibrary::FindLookAtRotation(GetMesh()->GetComponentLocation(), attackLoc).Yaw - 90.0f, 0.0f));
 
 	SetBusy(8, true);
+}
+
+bool AMainCharacter::IsGameOver() {
+	return GameOver;
 }

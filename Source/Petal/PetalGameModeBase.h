@@ -13,5 +13,6 @@ UCLASS()
 class PETAL_API APetalGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
-	
+public:
+	void EndGame(bool hasWon = false);
 };
