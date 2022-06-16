@@ -20,6 +20,7 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	AActor* ParentSpawner;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		UCharacterStats* EnemyStats;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -39,6 +40,7 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	void SetParent(AActor* parent);
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		UWidgetComponent* TargetingReticle;
 	UFUNCTION(BlueprintCallable)

@@ -4,6 +4,7 @@
 #include "BasicEnemy.h"
 #include "HealthBar.h"
 #include <Runtime/Engine/Classes/Kismet/GameplayStatics.h>
+#include <Petal/EnemySpawner.h>
 
 // Sets default values
 ABasicEnemy::ABasicEnemy()
@@ -41,6 +42,12 @@ void ABasicEnemy::HitReaction(FVector backwardsVelocity, int32 damage, bool mele
 		Cast<UHealthBar>(this->HealthBar->GetWidget())->AdjustBar((float)EnemyStats->GetHealth() / MaxHealth);
 		this->LaunchCharacter(backwardsVelocity, false, false);
 	}
-	else
+	else {
+		Cast<AEnemySpawner>(ParentSpawner)->KillEnemy();
 		this->Destroy();
+	}
+}
+
+void ABasicEnemy::SetParent(AActor* parent) {
+	ParentSpawner = parent;
 }

@@ -136,6 +136,10 @@ Date: 15/06/2022
 - Began work on enemy spawning.
 - Created ability to spawn waves of enemies in the arena.
 ------------------------------------------------------------------------------------------------------------------------------------
+Date: 16/06/2022
+
+- Added checks for enemy waves to determine when a wave has been completed, with the next wave being spawned when so.
+------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
 

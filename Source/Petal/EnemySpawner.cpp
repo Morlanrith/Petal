@@ -2,6 +2,7 @@
 
 
 #include "EnemySpawner.h"
+#include <Petal/CombatLevel.h>
 #include <Runtime/Engine/Classes/Kismet/KismetMathLibrary.h>
 
 // Sets default values
@@ -39,16 +40,24 @@ void AEnemySpawner::SpawnEnemy(TSubclassOf<ABasicEnemy> type, FVector startLocat
 	SpawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 	// Spawns the enemy
 	ABasicEnemy* enemy = GetWorld()->SpawnActor<ABasicEnemy>(type, startLocation, startRotation, SpawnInfo);
+	enemy->SetParent(this);
 	enemy->SpawnDefaultController(); // Makes sure the enemy's default controller is also created
 }
 
 void AEnemySpawner::SpawnWave(TArray<FWaveGroupStruct> wave)
 {
+	if (WaveTotal) return;
 	for (FWaveGroupStruct group : wave) {
 		for (int i = 0; i < group.EnemyAmount; i++) {
 			FVector location = UKismetMathLibrary::RandomPointInBoundingBox(SpawnArea->GetComponentLocation(),SpawnArea->GetScaledBoxExtent());
 			float yawRotation = UKismetMathLibrary::FindLookAtRotation(location,Player->GetMesh()->GetComponentLocation()).Yaw;
 			SpawnEnemy(group.EnemyType, location, FRotator(0.0f, yawRotation, 0.0f));
 		}
+		WaveTotal += group.EnemyAmount;
 	}
+}
+
+void AEnemySpawner::KillEnemy() {
+	WaveTotal--;
+	if (!WaveTotal) Cast<ACombatLevel>(GetWorld()->GetLevelScriptActor())->SpawnNextWave();
 }

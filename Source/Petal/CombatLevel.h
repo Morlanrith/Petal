@@ -20,7 +20,10 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	AEnemySpawner* Spawner;
+	int WaveNumber = 1;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TArray<FWaveGroupStruct> LevelWaves;
-	void SpawnSetWave(int32 waveNumber);
+	void SpawnSetWave();
+public:
+	void SpawnNextWave();
 };

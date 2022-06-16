@@ -37,6 +37,7 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	int WaveTotal = 0;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		UBoxComponent* SpawnArea;
 	void SpawnEnemy(TSubclassOf<ABasicEnemy> type, FVector startLocation, FRotator startRotation);
@@ -44,6 +45,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	void KillEnemy();
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		AMainCharacter* Player;
 	UFUNCTION(BlueprintCallable)
