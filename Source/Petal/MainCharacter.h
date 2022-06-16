@@ -62,8 +62,6 @@ protected:
 		UUserWidget* AimingReticle;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		AVisionOrb* TargetingOrb;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		UPlayer_UI* PlayerUI;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int32 MaxHealth;
 
@@ -98,6 +96,8 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		USpringArmComponent* CameraArm;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		UPlayer_UI* PlayerUI;
 	UFUNCTION(BlueprintCallable)
 		bool IsBusy(int32 checkValue);
 	UFUNCTION(BlueprintCallable)

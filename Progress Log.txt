@@ -139,6 +139,8 @@ Date: 15/06/2022
 Date: 16/06/2022
 
 - Added checks for enemy waves to determine when a wave has been completed, with the next wave being spawned when so.
+- Added a victory screen, and adjusted the game over function to work differently depending on the players success. Said screen
+will trigger when the player has defeated all waves of enemies.
 ------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
