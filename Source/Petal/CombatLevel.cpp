@@ -11,7 +11,8 @@ void ACombatLevel::BeginPlay()
 	Super::BeginPlay();
 	Spawner = Cast<AEnemySpawner>(UGameplayStatics::GetActorOfClass(GetWorld(), AEnemySpawner::StaticClass()));
 	Spawner->Player = Cast<AMainCharacter>(UGameplayStatics::GetActorOfClass(GetWorld(), AMainCharacter::StaticClass()));
-	SpawnSetWave();
+	WaveAmount = LevelWaves.Last(0).WaveNumber;
+	SpawnNextWave();
 }
 
 void ACombatLevel::SpawnSetWave() {
@@ -21,11 +22,16 @@ void ACombatLevel::SpawnSetWave() {
 		if (group.WaveNumber == WaveNumber) currentWave.Add(group);
 		else break;
 	}
-	if(currentWave.Num()) Spawner->SpawnWave(currentWave);
-	else ((APetalGameModeBase*)GetWorld()->GetAuthGameMode())->EndGame(true);
+	waveUI->StartWave(WaveNumber == WaveAmount ? -1 : WaveNumber);
+	Spawner->SpawnWave(currentWave);
 }
 
 void ACombatLevel::SpawnNextWave() {
 	WaveNumber++;
-	SpawnSetWave();
+	if(WaveAmount < WaveNumber)((APetalGameModeBase*)GetWorld()->GetAuthGameMode())->EndGame(true);
+	else {
+		waveUI->WaveCountdown();
+		FTimerHandle TimerHandle;
+		GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ACombatLevel::SpawnSetWave, 5, false);
+	}
 }

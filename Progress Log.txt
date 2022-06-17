@@ -142,6 +142,11 @@ Date: 16/06/2022
 - Added a victory screen, and adjusted the game over function to work differently depending on the players success. Said screen
 will trigger when the player has defeated all waves of enemies.
 ------------------------------------------------------------------------------------------------------------------------------------
+Date: 17/06/2022
+
+- Added timers between waves.
+- Added UI elements to wave transitions.
+------------------------------------------------------------------------------------------------------------------------------------
 Date:
 
 
