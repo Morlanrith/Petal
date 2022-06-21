@@ -1,5 +1,5 @@
 # Project Petal
- An unspecified project.
+ A project in where I attempted to create a prototype for a character-action game based on the web series "RWBY". As of now, development on this project has halted.
 
  Models/Animations used from:
 https://www.mixamo.com/

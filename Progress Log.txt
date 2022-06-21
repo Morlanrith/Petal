@@ -147,7 +147,15 @@ Date: 17/06/2022
 - Added timers between waves.
 - Added UI elements to wave transitions.
 ------------------------------------------------------------------------------------------------------------------------------------
-Date:
+Date: 21/06/2022
 
-
+- After deliberating on the current form of the project I have decided to stop development as it is now. As things currently stand,
+it will be immensely difficult to create the animations and models needed to create the prototype I envisioned. While I do believe
+that with enough practice and time, I could create what I'm seeking, this would involve a massive focus on developing my modelling
+and animation skills, with no time being spent on my programming. The major point of these projects is to keep my programming
+abilities fresh, and continue to develop their use within a games development mindset. Pursuing this animation work would halt this.
+- I won't rule out returning to the project someday, and I do still feel that I have learned a good deal within the short time I
+spent working on this project. But for now, this is the end. As for my next project, I will once again be returning to work on
+my mod for Terraria (known as TRRA), as the 1.4 version of tModLoader has now become the public version, meaning development should
+be much smoother.
 ------------------------------------------------------------------------------------------------------------------------------------
